@@ -1,4 +1,3 @@
-
 export const Filter = () => {
   const filterInput = document.querySelector('.filter-input')
   const filterBtn = document.querySelector('.filter-btn')

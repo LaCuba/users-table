@@ -1,0 +1,15 @@
+.users-list {
+  width: 950px;
+
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 200px);
+  gap: 50px;
+}
+
+.container {
+  display: grid;
+  justify-items: center;
+  width: 200px;
+  background-color: #fff;
+}
