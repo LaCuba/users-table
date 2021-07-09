@@ -14,21 +14,29 @@ export class Users {
             <img src=${user.picture.thumbnail} alt="" />
           </div>
           <div class="name">
-            <h3>${user.name.first}</h3>
-            <h3>${user.name.last}</h3>
+            <h3>${user.name.first} ${user.name.last}</h3>
           </div>
           <div class="location">
-            <h4>${user.location.state}</h4>
-            <h4>${user.location.city}</h4>
+            <div class="location-state">
+              <h4 class="title">State: </h4>
+              <h4 class="content">${user.location.state}</h4>
+            </div>
+            <div class="location-city">
+              <h4 class="title">City: </h4>
+              <h4 class="content">${user.location.city}</h4>
+            </div>
           </div>
           <div class="email">
-            <h4>${user.email}</h4>
+            <h4 class="title">Email: </h4>
+            <h4 class="content">${user.email}</h4>
           </div>
           <div class="phone">
-            <h4>${user.phone}</h4>
+            <h4 class="title">Phone: </h4>
+            <h4 class="content">${user.phone}</h4>
           </div>
           <div class="registerDate">
-            <h4>${user.registered.data}</h4>
+            <h4 class="title">Register date: </h4>
+            <h4 class="content">${user.registered.date}</h4>
           </div>
         </div>
       </div>
