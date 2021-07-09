@@ -1,7 +1,13 @@
+import { Store } from "../../stateManagment/Store"
+import { setUsers } from "../../stateManagment/UsersReducer"
+
 export class Users {
 
-  static drawUsers (users) {
+  static drawUsers () {
+    setUsers()
+
     const user = document.querySelector('.users-list')
+    const users = Store.getState().users.users
     const html = users.map(Users.htmlUser).join('')
     user.innerHTML = html
   }

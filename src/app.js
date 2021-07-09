@@ -1,15 +1,16 @@
 import { Filter } from './components/Filter/Filter'
 import { Users } from './components/Users/Users'
-import { UsersApi } from './api/api'
+import { Store } from './stateManagment/Store'
 
 import './Styles.css'
 import './components/Filter/FilterStyles.css'
 import './components/Users/UsersStyles.css'
 
-Filter()
+const App = () => {
+  Filter()
+  Users.drawUsers()
+}
 
-UsersApi.getUsers().then(
-  response => {
-    Users.drawUsers(response)
-  }
-)
+App()
+
+Store.subscribes(App)
