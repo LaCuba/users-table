@@ -13,6 +13,15 @@ export class Users {
   }
 
   static htmlUser (user) {
+
+    const options = {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric'
+    }
+    const date = new Date(user.registered.date);
+    const newDate = date.toLocaleString('ru', options)
+
     return `
       <div class="container">
         <div class="info">
@@ -25,11 +34,11 @@ export class Users {
           <div class="location">
             <div class="location-state">
               <h4 class="title">State: </h4>
-              <h4 class="content">${user.location.state}</h4>
+              <h4 class="location-content content">${user.location.state}</h4>
             </div>
             <div class="location-city">
               <h4 class="title">City: </h4>
-              <h4 class="content">${user.location.city}</h4>
+              <h4 class="location-content content">${user.location.city}</h4>
             </div>
           </div>
           <div class="email">
@@ -42,7 +51,7 @@ export class Users {
           </div>
           <div class="registerDate">
             <h4 class="title">Register date: </h4>
-            <h4 class="content">${user.registered.date}</h4>
+            <h4 class="content">${newDate}</h4>
           </div>
         </div>
       </div>

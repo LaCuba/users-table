@@ -44,6 +44,7 @@
 .location-city {
   display: flex;
   gap: 5px;
+
 }
 
 .title {
@@ -59,6 +60,13 @@
   color: #686868;
   margin-bottom: 5px;
   max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.location-content {
+  max-width: 165px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
