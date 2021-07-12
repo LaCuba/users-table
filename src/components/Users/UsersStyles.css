@@ -1,13 +1,3 @@
-.users-list {
-  width: 1120px;
-
-  margin: 0 auto;
-  margin-bottom: 50px;
-  display: grid;
-  grid-template-columns: repeat(4, 250px);
-  gap: 40px;
-}
-
 .container {
   box-sizing: border-box;
   display: grid;
@@ -44,13 +34,12 @@
 .location-city {
   display: flex;
   gap: 5px;
-
 }
 
 .title {
   font-size: 16px;
   font-size: 500;
-  
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -70,4 +59,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.message-filter {
+  margin: 0 auto;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
 }

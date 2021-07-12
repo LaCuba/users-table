@@ -50,14 +50,34 @@ export const draw = () => {
   if (Store.getState().users.users.length === 0) {
     setUsers()
   }
-
   const usersContainer = document.querySelector(".users-list")
 
-  let users =
-    Store.getState().users.filterUsers.length > 0
-      ? Store.getState().users.filterUsers
-      : Store.getState().users.users
+  if (Store.getState().users.filterMessage) {
+    usersContainer.style.cssText = "none"
+    usersContainer.style.cssText = `
+    width: 1120px;
+    margin: 0 auto;
+    margin-bottom: 50px;`
 
-  const html = users.map(renderOne).join("")
-  usersContainer.innerHTML = html
+    const html = `<h2 class="message-filter">${
+      Store.getState().users.filterMessage
+    }</h2>`
+    usersContainer.innerHTML = html
+  } else {
+    usersContainer.style.cssText = `
+    width: 1120px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 250px);
+    gap: 40px;`
+
+    let users =
+      Store.getState().users.filterUsers.length > 0
+        ? Store.getState().users.filterUsers
+        : Store.getState().users.users
+
+    const html = users.map(renderOne).join("")
+    usersContainer.innerHTML = html
+  }
 }

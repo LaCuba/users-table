@@ -1,4 +1,5 @@
 import { Filter } from "./components/Filter/Filter"
+import * as Users from "./components/Users/Users"
 import { Store } from "./stateManagment/Store"
 
 import "./Styles.css"
@@ -7,7 +8,7 @@ import "./components/Users/UsersStyles.css"
 
 const App = () => {
   const clearFilter = Filter()
-  render()
+  Users.draw()
 
   return () => {
     clearFilter()

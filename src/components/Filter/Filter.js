@@ -1,5 +1,8 @@
 import { Store } from "../../stateManagment/Store"
-import { usersFilter } from "../../stateManagment/UsersReducer"
+import {
+  resultsFilterRemoter,
+  usersFilter,
+} from "../../stateManagment/UsersReducer"
 
 export const Filter = () => {
   const filterInput = document.querySelector(".filter-input")
@@ -10,11 +13,21 @@ export const Filter = () => {
   cancelBtn.addEventListener("click", cancelHandler)
 
   function filterUsersHandler() {
-    Store.dispatch(usersFilter(filterInput.value))
+    let filterUsers = Store.getState().users.users.filter((u) => {
+      if (
+        u.name.first
+          .toLowerCase()
+          .startsWith(filterInput.value.toLowerCase()) ||
+        u.name.last.toLowerCase().startsWith(filterInput.value.toLowerCase())
+      ) {
+        return u
+      }
+    })
+    Store.dispatch(usersFilter(filterUsers))
   }
 
   function cancelHandler() {
-    Store.dispatch(usersFilter(""))
+    Store.dispatch(resultsFilterRemoter())
     filterInput.value = ""
   }
 

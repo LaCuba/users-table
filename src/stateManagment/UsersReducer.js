@@ -3,6 +3,7 @@ import { Store } from "./Store"
 
 const SET_USERS = "users/SET-USERS"
 const FILTER_USERS = "users/FILTER-USERS"
+const REMOTE_RESULT_FILTER = "users/REMOTE-RESULT-FILTER"
 
 const UsersReducer = (state, action) => {
   switch (action.type) {
@@ -13,24 +14,25 @@ const UsersReducer = (state, action) => {
       }
     }
     case FILTER_USERS: {
-      if (action.name !== "") {
+      if (action.users.length > 0) {
         return {
           ...state,
-          filterUsers: state.users.filter((u) => {
-            if (
-              u.name.first
-                .toLowerCase()
-                .startsWith(action.name.toLowerCase()) ||
-              u.name.last.toLowerCase().startsWith(action.name.toLowerCase())
-            ) {
-              return u
-            }
-          }),
+          filterUsers: action.users,
+          filterMessage: undefined,
+        }
+      } else if (action.users.length === 0) {
+        return {
+          ...state,
+          filterUsers: [],
+          filterMessage: "Пользователи с таким именем не найдены!",
         }
       }
+    }
+    case REMOTE_RESULT_FILTER: {
       return {
         ...state,
         filterUsers: [],
+        filterMessage: undefined,
       }
     }
     default:
@@ -39,7 +41,8 @@ const UsersReducer = (state, action) => {
 }
 
 const setUsersAction = (users) => ({ type: SET_USERS, users })
-export const usersFilter = (name) => ({ type: FILTER_USERS, name })
+export const usersFilter = (users) => ({ type: FILTER_USERS, users })
+export const resultsFilterRemoter = () => ({ type: REMOTE_RESULT_FILTER })
 
 export function setUsers() {
   UsersApi.getUsers().then((response) => {
