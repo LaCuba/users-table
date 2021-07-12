@@ -6,6 +6,7 @@ export const Store = {
       users: [],
       filterUsers: [],
       filterMessage: undefined,
+      isFetching: false,
     },
   },
 

@@ -15,9 +15,9 @@ const App = () => {
   }
 }
 
-let clear = App()
-
 Store.subscribes(() => {
   clear()
   clear = App()
 })
+
+let clear = App()
