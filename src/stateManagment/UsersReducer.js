@@ -1,14 +1,36 @@
 import { UsersApi } from "../api/api"
 import { Store } from "./Store"
 
-const SET_USERS = 'users/SET-USERS'
+const SET_USERS = "users/SET-USERS"
+const FILTER_USERS = "users/FILTER-USERS"
 
 const UsersReducer = (state, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SET_USERS: {
       return {
         ...state,
-        users: action.users
+        users: action.users,
+      }
+    }
+    case FILTER_USERS: {
+      if (action.name !== "") {
+        return {
+          ...state,
+          filterUsers: state.users.filter((u) => {
+            if (
+              u.name.first
+                .toLowerCase()
+                .startsWith(action.name.toLowerCase()) ||
+              u.name.last.toLowerCase().startsWith(action.name.toLowerCase())
+            ) {
+              return u
+            }
+          }),
+        }
+      }
+      return {
+        ...state,
+        filterUsers: [],
       }
     }
     default:
@@ -16,16 +38,13 @@ const UsersReducer = (state, action) => {
   }
 }
 
-const setUsersActionCreator = (users) => ({type: SET_USERS, users})
+const setUsersAction = (users) => ({ type: SET_USERS, users })
+export const usersFilter = (name) => ({ type: FILTER_USERS, name })
 
-export function setUsers () {
-  if (Store.getState().users.users.length <= 0) {
-    UsersApi.getUsers().then(
-      response => {
-        Store.dispatch(setUsersActionCreator(response))
-      }
-    )
-  }
+export function setUsers() {
+  UsersApi.getUsers().then((response) => {
+    Store.dispatch(setUsersAction(response))
+  })
 }
 
 export default UsersReducer

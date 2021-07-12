@@ -1,28 +1,33 @@
 import UsersReducer from "./UsersReducer"
 
 export const Store = {
-  
   _state: {
     users: {
-      users: []
+      users: [],
+      filterUsers: [],
     },
   },
-  
+
+  _observers: [],
+
   getState() {
     return this._state
   },
 
-  _renderProject() {
-    console.log("State changed")
+  _update() {
+    for (const observer of this._observers) {
+      observer()
+    }
   },
 
   subscribes(observer) {
-    this._renderProject = observer
+    this._observers.push(observer)
   },
 
-  dispatch(action) {  // TYPE
+  dispatch(action) {
     this._state.users = UsersReducer(this._state.users, action)
-
-    this._renderProject(this._state)
-  }
+    this._update()
+  },
 }
+
+window.store = Store
