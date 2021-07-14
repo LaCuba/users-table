@@ -5,11 +5,14 @@ import { store } from "./stateManagment/store"
 import "./styles.css"
 import "./components/filter/filterStyles.css"
 import "./components/users/usersStyles.css"
+import { setUsers } from "./stateManagment/usersReducer"
 
 const app = () => {
+  if (store.getState().users.users.length === 0) {
+    setUsers()
+  }
   const clearFilter = filter()
   users.draw()
-
   return () => {
     clearFilter()
   }

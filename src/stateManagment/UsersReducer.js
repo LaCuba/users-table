@@ -1,4 +1,5 @@
 import { usersApi } from "../api/api"
+import { loader } from "../common/loader"
 import { store } from "./store"
 
 const SET_USERS = "users/SET-USERS"
@@ -45,9 +46,11 @@ export const usersFilter = (users) => ({ type: FILTER_USERS, users })
 export const resultsFilterRemoter = () => ({ type: REMOTE_RESULT_FILTER })
 
 export function setUsers() {
+  loader(true)
   usersApi.getUsers().then((response) => {
     store.dispatch(setUsersAction(response))
+    loader(false)
   })
 }
 
-export default UsersReducer
+export default usersReducer

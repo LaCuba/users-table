@@ -1,6 +1,4 @@
-import { loader } from "../../common/loader"
 import { store } from "../../stateManagment/store"
-import { setUsers } from "../../stateManagment/usersReducer"
 
 const renderOne = (user) => {
   const options = {
@@ -48,12 +46,7 @@ const renderOne = (user) => {
 }
 
 export const draw = () => {
-  if (store.getState().users.users.length === 0) {
-    loader(true)
-    setUsers()
-  }
   if (store.getState().users.users.length > 0) {
-    loader(false)
     const usersContainer = document.querySelector(".users-list")
 
     if (store.getState().users.filterMessage) {

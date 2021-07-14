@@ -4,7 +4,7 @@ import {
   usersFilter,
 } from "../../stateManagment/usersReducer"
 
-export const renderFilter = () => {
+const renderFilter = () => {
   return `
     <span class="filter-input-container">
       <input class="filter-input" type="text" />
@@ -18,21 +18,23 @@ export const renderFilter = () => {
   `
 }
 
-export const filter = () => {
+const draw = () => {
   const filterContainer = document.getElementById("filter")
   if (!filterContainer.firstChild) {
     const html = renderFilter()
     filterContainer.innerHTML = html
   }
+}
 
+const filterUsersHandler = () => {
   const filterInput = document.querySelector(".filter-input")
   const filterBtn = document.querySelector(".filter-btn")
   const cancelBtn = document.querySelector(".filter-cancel-btn")
 
-  filterBtn.addEventListener("click", filterUsersHandler)
+  filterBtn.addEventListener("click", filterHandler)
   cancelBtn.addEventListener("click", cancelHandler)
 
-  function filterUsersHandler() {
+  function filterHandler() {
     let filterUsers = store.getState().users.users.filter((u) => {
       if (
         u.name.first
@@ -52,7 +54,15 @@ export const filter = () => {
   }
 
   return () => {
-    filterBtn.removeEventListener("click", filterUsersHandler)
+    filterBtn.removeEventListener("click", filterHandler)
     cancelBtn.removeEventListener("click", cancelHandler)
+  }
+}
+
+export const filter = () => {
+  draw()
+  let clear = filterUsersHandler()
+  return () => {
+    clear()
   }
 }
