@@ -4,7 +4,27 @@ import {
   usersFilter,
 } from "../../stateManagment/UsersReducer"
 
+export const renderFilter = () => {
+  return `
+    <span class="filter-input-container">
+      <input class="filter-input" type="text" />
+    </span>
+    <span class="filter-cancel-btn-container">
+      <button class="filter-cancel-btn">X</button>
+    </span>
+    <span class="filter-btn-container">
+      <button class="filter-btn">Filter</button>
+    </span>
+  `
+}
+
 export const Filter = () => {
+  const filterContainer = document.getElementById("filter")
+  if (!filterContainer.firstChild) {
+    const html = renderFilter()
+    filterContainer.innerHTML = html
+  }
+
   const filterInput = document.querySelector(".filter-input")
   const filterBtn = document.querySelector(".filter-btn")
   const cancelBtn = document.querySelector(".filter-cancel-btn")
