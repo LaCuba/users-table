@@ -1,23 +1,23 @@
-import { Filter } from "./components/Filter/Filter"
-import * as Users from "./components/Users/Users"
-import { Store } from "./stateManagment/Store"
+import { filter } from "./components/filter/filter"
+import * as users from "./components/users/users"
+import { store } from "./stateManagment/store"
 
-import "./Styles.css"
-import "./components/Filter/FilterStyles.css"
-import "./components/Users/UsersStyles.css"
+import "./styles.css"
+import "./components/filter/filterStyles.css"
+import "./components/users/usersStyles.css"
 
-const App = () => {
-  const clearFilter = Filter()
-  Users.draw()
+const app = () => {
+  const clearFilter = filter()
+  users.draw()
 
   return () => {
     clearFilter()
   }
 }
 
-Store.subscribes(() => {
+store.subscribes(() => {
   clear()
-  clear = App()
+  clear = app()
 })
 
-let clear = App()
+let clear = app()

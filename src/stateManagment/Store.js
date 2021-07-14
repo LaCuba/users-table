@@ -1,6 +1,6 @@
-import UsersReducer from "./UsersReducer"
+import usersReducer from "./usersReducer"
 
-export const Store = {
+export const store = {
   _state: {
     users: {
       users: [],
@@ -27,9 +27,9 @@ export const Store = {
   },
 
   dispatch(action) {
-    this._state.users = UsersReducer(this._state.users, action)
+    this._state.users = usersReducer(this._state.users, action)
     this._update()
   },
 }
 
-window.store = Store
+window.store = store

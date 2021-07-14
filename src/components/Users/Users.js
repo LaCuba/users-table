@@ -1,6 +1,6 @@
 import { loader } from "../../common/loader"
-import { Store } from "../../stateManagment/Store"
-import { setUsers } from "../../stateManagment/UsersReducer"
+import { store } from "../../stateManagment/store"
+import { setUsers } from "../../stateManagment/usersReducer"
 
 const renderOne = (user) => {
   const options = {
@@ -48,15 +48,15 @@ const renderOne = (user) => {
 }
 
 export const draw = () => {
-  if (Store.getState().users.users.length === 0) {
+  if (store.getState().users.users.length === 0) {
     loader(true)
     setUsers()
   }
-  if (Store.getState().users.users.length > 0) {
+  if (store.getState().users.users.length > 0) {
     loader(false)
     const usersContainer = document.querySelector(".users-list")
 
-    if (Store.getState().users.filterMessage) {
+    if (store.getState().users.filterMessage) {
       usersContainer.style.cssText = "none"
       usersContainer.style.cssText = `
       width: 1120px;
@@ -64,7 +64,7 @@ export const draw = () => {
       margin-bottom: 50px;`
 
       const html = `<h2 class="message-filter">${
-        Store.getState().users.filterMessage
+        store.getState().users.filterMessage
       }</h2>`
       usersContainer.innerHTML = html
     } else {
@@ -77,9 +77,9 @@ export const draw = () => {
       gap: 40px;`
 
       let users =
-        Store.getState().users.filterUsers.length > 0
-          ? Store.getState().users.filterUsers
-          : Store.getState().users.users
+        store.getState().users.filterUsers.length > 0
+          ? store.getState().users.filterUsers
+          : store.getState().users.users
 
       const html = users.map(renderOne).join("")
       usersContainer.innerHTML = html

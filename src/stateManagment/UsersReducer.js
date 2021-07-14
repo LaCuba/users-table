@@ -1,11 +1,11 @@
-import { UsersApi } from "../api/api"
-import { Store } from "./Store"
+import { usersApi } from "../api/api"
+import { store } from "./store"
 
 const SET_USERS = "users/SET-USERS"
 const FILTER_USERS = "users/FILTER-USERS"
 const REMOTE_RESULT_FILTER = "users/REMOTE-RESULT-FILTER"
 
-const UsersReducer = (state, action) => {
+const usersReducer = (state, action) => {
   switch (action.type) {
     case SET_USERS: {
       return {
@@ -45,8 +45,8 @@ export const usersFilter = (users) => ({ type: FILTER_USERS, users })
 export const resultsFilterRemoter = () => ({ type: REMOTE_RESULT_FILTER })
 
 export function setUsers() {
-  UsersApi.getUsers().then((response) => {
-    Store.dispatch(setUsersAction(response))
+  usersApi.getUsers().then((response) => {
+    store.dispatch(setUsersAction(response))
   })
 }
 

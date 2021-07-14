@@ -1,8 +1,8 @@
-import { Store } from "../../stateManagment/Store"
+import { store } from "../../stateManagment/store"
 import {
   resultsFilterRemoter,
   usersFilter,
-} from "../../stateManagment/UsersReducer"
+} from "../../stateManagment/usersReducer"
 
 export const renderFilter = () => {
   return `
@@ -18,7 +18,7 @@ export const renderFilter = () => {
   `
 }
 
-export const Filter = () => {
+export const filter = () => {
   const filterContainer = document.getElementById("filter")
   if (!filterContainer.firstChild) {
     const html = renderFilter()
@@ -33,7 +33,7 @@ export const Filter = () => {
   cancelBtn.addEventListener("click", cancelHandler)
 
   function filterUsersHandler() {
-    let filterUsers = Store.getState().users.users.filter((u) => {
+    let filterUsers = store.getState().users.users.filter((u) => {
       if (
         u.name.first
           .toLowerCase()
@@ -43,11 +43,11 @@ export const Filter = () => {
         return u
       }
     })
-    Store.dispatch(usersFilter(filterUsers))
+    store.dispatch(usersFilter(filterUsers))
   }
 
   function cancelHandler() {
-    Store.dispatch(resultsFilterRemoter())
+    store.dispatch(resultsFilterRemoter())
     filterInput.value = ""
   }
 
