@@ -12,9 +12,6 @@ const renderFilter = () => {
     <span class="filter-cancel-btn-container">
       <button class="filter-cancel-btn">X</button>
     </span>
-    <span class="filter-btn-container">
-      <button class="filter-btn">Filter</button>
-    </span>
   `
 }
 
@@ -28,24 +25,32 @@ const draw = () => {
 
 const filterUsersHandler = () => {
   const filterInput = document.querySelector(".filter-input")
-  const filterBtn = document.querySelector(".filter-btn")
   const cancelBtn = document.querySelector(".filter-cancel-btn")
 
-  filterBtn.addEventListener("click", filterHandler)
+  filterInput.addEventListener("input", filterHandler)
   cancelBtn.addEventListener("click", cancelHandler)
 
-  function filterHandler() {
-    let filterUsers = store.getState().users.users.filter((u) => {
-      if (
-        u.name.first
-          .toLowerCase()
-          .startsWith(filterInput.value.toLowerCase()) ||
-        u.name.last.toLowerCase().startsWith(filterInput.value.toLowerCase())
-      ) {
-        return u
-      }
-    })
-    store.dispatch(usersFilter(filterUsers))
+  let timer = null
+
+  function filterHandler(e) {
+    if (e.target.value) {
+      clearTimeout(timer)
+      timer = window.setTimeout(
+        (name) => {
+          let filterUsers = store.getState().users.users.filter((u) => {
+            if (
+              u.name.first.toLowerCase().startsWith(name.toLowerCase()) ||
+              u.name.last.toLowerCase().startsWith(name.toLowerCase())
+            ) {
+              return u
+            }
+          })
+          store.dispatch(usersFilter(filterUsers))
+        },
+        1500,
+        e.target.value
+      )
+    }
   }
 
   function cancelHandler() {
@@ -54,7 +59,7 @@ const filterUsersHandler = () => {
   }
 
   return () => {
-    filterBtn.removeEventListener("click", filterHandler)
+    filterInput.removeEventListener("input", filterHandler)
     cancelBtn.removeEventListener("click", cancelHandler)
   }
 }
