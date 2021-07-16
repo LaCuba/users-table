@@ -13,24 +13,22 @@ const renderOne = (user) => {
     <div class="container">
       <div class="info">
         <div class="avatar">
-          <img src=${user.picture.thumbnail} alt="" />
+          <img class="avatar-min" src=${user.picture.thumbnail} alt="" />
+          <div class="tooltip-avatar">
+            <img class="avatar-max" src=${user.picture.large} alt="" />
+          </div>
         </div>
         <div class="name">
           <h3>${user.name.first} ${user.name.last}</h3>
         </div>
         <div class="location">
-          <div class="location-state">
-            <h4 class="title">State: </h4>
-            <h4 class="location-content content">${user.location.state}</h4>
-          </div>
-          <div class="location-city">
-            <h4 class="title">City: </h4>
-            <h4 class="location-content content">${user.location.city}</h4>
-          </div>
+          <h4 class="location-content">${user.location.state}, </h4>
+          <h4 class="location-content">${user.location.city}</h4>
         </div>
         <div class="email">
           <h4 class="title">Email: </h4>
-          <h4 class="content">${user.email}</h4>
+          <h4 class="email-content content">${user.email}</h4>
+          <span class="tooltip-email">${user.email}</span>
         </div>
         <div class="phone">
           <h4 class="title">Phone: </h4>
@@ -66,8 +64,8 @@ export const draw = () => {
       margin: 0 auto;
       margin-bottom: 50px;
       display: grid;
-      grid-template-columns: repeat(4, 250px);
-      gap: 40px;`
+      grid-template-columns: repeat(4, 265px);
+      gap: 20px;`
 
       let users =
         store.getState().users.filterUsers.length > 0

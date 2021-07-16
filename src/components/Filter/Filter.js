@@ -33,6 +33,7 @@ const filterUsersHandler = () => {
   let timer = null
 
   function filterHandler(e) {
+    debugger
     if (e.target.value) {
       clearTimeout(timer)
       timer = window.setTimeout(
