@@ -4,7 +4,7 @@
 
 ### Technologies:
 
-`Sass` `JavaScript` `React` `TypeScript` `Redux` `REST API` `Redux-thunk` `Axios`
+`CSS` `HTML` `JavaScript`
 
 ### How to launch a project:
 
